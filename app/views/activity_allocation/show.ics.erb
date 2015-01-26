@@ -5,7 +5,6 @@ PRODID:-//<%= request.host %>//Swinburne Timetable Generator//EN
 X-WR-CALNAME:Swinburne Timetable
 X-WR-CALDESC:iCal Generated Timetable - Created <%= @timezone.at(@allocation.created_at) %>, Last Fetched <%= @timezone.now %>
 X-WR-TIMEZONE:Australia/Melbourne
-
 <% @activities.each do |activity|
   day_of_week_offset = (Date.parse(activity['day_of_week']).cwday - 1).days
   activity['assigned_locations'].values.each do |location|
@@ -28,7 +27,6 @@ STATUS:CONFIRMED
 DTSTART;TZID="Australia/Melbourne":<%= start_time.strftime('%Y%m%dT%H%M%S') %>
 DTEND;TZID="Australia/Melbourne":<%= end_time.strftime('%Y%m%dT%H%M%S') %>
 END:VEVENT
-
     <% end %>
   <% end %>
 <% end %>
