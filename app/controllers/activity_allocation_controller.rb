@@ -3,6 +3,9 @@ class ActivityAllocationController < ApplicationController
   end
 
   def show
+    AllocateApiClient::CACHE_STORE.clear if params[:purge].present?
+
+    expires_in 1.day, public: true
     respond_to do |format|
       format.json { render json: activity_allocation, root: :timetable, url_options: default_url_options, include: includes_params }
       format.ics do
