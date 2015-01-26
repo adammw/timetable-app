@@ -1,0 +1,19 @@
+.icon-button {
+  color: inherit;
+  text-decoration: none;
+}
+
+.icon-med {
+  font-size: 16px;
+}
+
+.icon-hover-highlight:hover {
+  .icon-squared-plus {
+    color: #3c763d;
+  }
+
+  .icon-squared-minus {
+    color: #a94442;
+  }
+}
+

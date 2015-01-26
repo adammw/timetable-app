@@ -1,14 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Timetable</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+  <![endif]-->
 </head>
 <body>
+  <div id="layout">
+    <a href="#menu" id="menuLink" class="menu-link">
+      <span></span>
+    </a>
 
-<%= yield %>
+    <div id="menu">
+      <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading" href="#">Timetable</a>
 
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

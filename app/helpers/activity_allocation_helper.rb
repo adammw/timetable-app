@@ -1,0 +1,2 @@
+module ActivityAllocationHelper
+end

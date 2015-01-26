@@ -1,0 +1,20 @@
+.unit-list {
+  padding: 0;
+  margin: 0;
+}
+
+.unit-list li {
+  list-style: none;
+  padding: 0.6em 0 0.3em 0;
+  border-bottom: 1px dotted #eee;
+}
+
+.unit-list p {
+  margin: 0;
+}
+
+.list-item-buttons {
+  float: left;
+  padding: 2px;
+  margin-right: 2px;
+}

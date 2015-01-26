@@ -1,0 +1,36 @@
+<% @timezone = ActiveSupport::TimeZone.new("Australia/Melbourne") %>
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//<%= request.host %>//Swinburne Timetable Generator//EN
+X-WR-CALNAME:Swinburne Timetable
+X-WR-CALDESC:iCal Generated Timetable - Created <%= @timezone.at(@allocation.created_at) %>, Last Fetched <%= @timezone.now %>
+X-WR-TIMEZONE:Australia/Melbourne
+
+<% @activities.each do |activity|
+  day_of_week_offset = (Date.parse(activity['day_of_week']).cwday - 1).days
+  activity['assigned_locations'].values.each do |location|
+    week_offsets = (0...location['week_pattern'].length).find_all { |i| location['week_pattern'][i, 1] == '1' }
+    week_offsets.each do |week_offset|
+      start_time = @timezone.parse("#{activity['start_date']} #{activity['start_time']}") + week_offset.week + day_of_week_offset
+      end_time = start_time + activity['duration'].to_i.minutes %>
+BEGIN:VEVENT
+UID: <%= [ activity['subject_code'], activity['activity_group_code'], activity['activity_code'], week_offset ].join('|') %>
+SUMMARY: <%= [ activity['subject_code'].split('_').first, activity['activity_group_code'] ].join(' ') %>: <%= location['location_id'] %>
+DESCRIPTION:
+ <%= [ activity['subject_code'].split('_').first, activity['description'], activity['activity_group_code'], activity['activity_code'] ].join(' ') %>\n
+ <%= location['location_id'] %> <%= activity['zone'] %>
+LOCATION: <%= location['location_id'] %>
+GEO: <%= location['lat'] %>;<%= location['lng'] %>
+<% if activity['staff'] != '-' %>
+ORGANIZER;CN=<%= activity['staff'].split.reverse.join(' ') %>:MAILTO:<%= activity['staff'].split.reverse.join.downcase %>@swin.edu.au
+<% end %>
+STATUS:CONFIRMED
+DURATION:PT<%= activity['duration'] %>M
+DTSTART;TZID="Australia/Melbourne":<%= start_time.strftime('%Y%m%dT%H%M%S') %>
+DTEND;TZID="Australia/Melbourne":<%= end_time.strftime('%Y%m%dT%H%M%S') %>
+END:VEVENT
+
+    <% end %>
+  <% end %>
+<% end %>
+END:VCALENDAR
