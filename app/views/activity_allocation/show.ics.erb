@@ -19,7 +19,7 @@ DESCRIPTION:
  <%= [ activity['subject_code'].split('_').first, activity['description'], activity['activity_group_code'], activity['activity_code'] ].join(' ') %>\n
  <%= location['location_id'] %> <%= activity['zone'] %>
 LOCATION: <%= location['location_id'] %>
-GEO: <%= location['lat'] %>;<%= location['lng'] %>
+GEO:<%= location['lat'] %>;<%= location['lng'] %>
 <% if activity['staff'] != '-' %>
 ORGANIZER;CN=<%= activity['staff'].split.reverse.join(' ') %>:MAILTO:<%= activity['staff'].split.reverse.join.downcase %>@swin.edu.au
 <% end %>
