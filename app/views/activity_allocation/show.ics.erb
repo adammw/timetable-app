@@ -25,7 +25,6 @@ GEO: <%= location['lat'] %>;<%= location['lng'] %>
 ORGANIZER;CN=<%= activity['staff'].split.reverse.join(' ') %>:MAILTO:<%= activity['staff'].split.reverse.join.downcase %>@swin.edu.au
 <% end %>
 STATUS:CONFIRMED
-DURATION:PT<%= activity['duration'] %>M
 DTSTART;TZID="Australia/Melbourne":<%= start_time.strftime('%Y%m%dT%H%M%S') %>
 DTEND;TZID="Australia/Melbourne":<%= end_time.strftime('%Y%m%dT%H%M%S') %>
 END:VEVENT
