@@ -1,6 +1,9 @@
 var LinkGenerator = React.createClass({
   getInitialState: function() {
-    return { disabled: false, url: null };
+    return { disabled: true, url: null };
+  },
+  setDisabledState: function(disabled) {
+    this.setState({ disabled: disabled });
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -25,11 +28,15 @@ var LinkGenerator = React.createClass({
   },
   render: function() {
     return (
-      <form className="pure-form" onSubmit={this.handleSubmit}>
+      <form className="pure-form link-generator" onSubmit={this.handleSubmit}>
         <fieldset>
-          <legend>Generate your iCal URL:</legend>&nbsp;
-          <button type="submit" className="pure-button pure-button-primary" disabled={this.state.disabled}>Generate URL</button>
-          { this.state.url ? <input value={this.state.url} className="url" readonly /> : null }
+          <legend>Generate your iCal URL:</legend>
+          <div className="pure-g">
+            <div className="pure-u-1-4">
+              <button type="submit" className="pure-button pure-button-primary" disabled={this.state.disabled}>Generate URL</button>
+            </div>
+            <input value={this.state.url} hidden={!this.state.url} className="url pure-u-3-4" readOnly={true} />
+          </div>
         </fieldset>
       </form>
     );

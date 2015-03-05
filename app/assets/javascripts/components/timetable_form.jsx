@@ -9,6 +9,7 @@ var TimetableForm = React.createClass({
   },
   activitySelectionChanged: function(selectedActivities) {
     this.setState({ selectedActivities: selectedActivities });
+    this.refs.linkGenerator.setDisabledState(!_.values(selectedActivities).length);
   },
   render: function() {
     return (
@@ -39,7 +40,7 @@ var TimetableForm = React.createClass({
           <strong>STEP 3</strong>
         </div>
         <div className="pure-u-4-5">
-          <LinkGenerator activities={this.state.selectedActivities} />
+          <LinkGenerator ref="linkGenerator" activities={this.state.selectedActivities} />
         </div>
       </div>
     );
