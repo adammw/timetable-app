@@ -1,5 +1,6 @@
 class ActivityAllocation < ActiveRecord::Base
   serialize :activity_ids
+  validates :activity_ids, length: { minimum: 1, too_short: 'must have at least %{count} activity' }
 
   def activities
     @activities ||= begin

@@ -16,7 +16,7 @@ class ActivityAllocationController < ApplicationController
   end
 
   def create
-    render json: ActivityAllocation.create(activity_allocation_params), root: :timetable, url_options: default_url_options
+    render json: ActivityAllocation.create!(activity_allocation_params), root: :timetable, url_options: default_url_options
   end
 
   private
