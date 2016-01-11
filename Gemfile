@@ -11,7 +11,7 @@ gem 'sprockets-traceur'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'react-rails', '~> 1.5.0'
 
 gem 'therubyracer', platforms: :ruby
 gem 'therubyrhino', platforms: :jruby
@@ -22,7 +22,6 @@ gem 'active_model_serializers', '~> 0.8.3'
 gem 'stronger_parameters'
 gem 'faraday'
 gem 'faraday_middleware'
-
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-pure'

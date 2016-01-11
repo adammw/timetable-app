@@ -4,10 +4,9 @@ var UnitSearch = React.createClass({
     this.props.onSubmit && this.props.onSubmit();
     var query = this.refs.query.getDOMNode().value.trim();
     $.ajax({
-      method: 'POST',
-      url: 'https://cors-anywhere.herokuapp.com/https://allocate.swin.edu.au/aplus/rest/timetable/subjects',
+      url: '/subjects',
       data: {
-        'search-term': query
+        query: query
       },
       dataType: 'json'
     }).then(function(results) {

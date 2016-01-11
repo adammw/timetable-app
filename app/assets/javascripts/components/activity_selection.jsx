@@ -31,7 +31,7 @@ var ActivitySelection = React.createClass({
     var removedUnits = _.difference(Object.keys(this.state.activities), Object.keys(this.props.units));
     console.log('addded', addedUnits, 'removed', removedUnits, this.props, this.state);
     addedUnits.forEach(function(unitCode) {
-      $.getJSON('https://cors-anywhere.herokuapp.com/https://allocate.swin.edu.au/aplus/rest/timetable/subject/' + unitCode + '/activities').then(function(results) {
+      $.getJSON('/subjects/' + unitCode + '/activities').then(function(results) {
         var unitActivities = this.activityMapForUnit(results);
         var activities = _.clone(this.state.activities);
         activities[unitCode] = unitActivities;
@@ -40,7 +40,7 @@ var ActivitySelection = React.createClass({
         this.setState({ activities: activities, selectedActivities: selectedActivities });
         this.props.onChange && this.props.onChange(selectedActivities);
       }.bind(this));
-      $.getJSON('https://cors-anywhere.herokuapp.com/https://allocate.swin.edu.au/aplus/rest/timetable/subject/' + unitCode + '/activity_groups').then(function(results) {
+      $.getJSON('/subjects/' + unitCode + '/activity_groups').then(function(results) {
         var activityGroups = _.clone(this.state.activityGroups);
         activityGroups[unitCode] = results;
         this.setState({ activityGroups: activityGroups });
