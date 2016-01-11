@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby File.read(File.expand_path('../.ruby-version', __FILE__)).chomp || '2.0.0'
+ruby File.read(File.expand_path('../.ruby-version', __FILE__)).chomp || '2.3.0'
 
 gem 'bundler', '>= 1.7.0'
 gem 'puma'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.5'
 gem 'pg'
 
 gem 'sprockets', '~> 2.12.3'
