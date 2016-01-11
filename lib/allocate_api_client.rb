@@ -1,7 +1,9 @@
 class AllocateApiClient
   CACHE_STORE = ActiveSupport::Cache::MemoryStore.new(namespace: 'allocate_api', expires_in: 1.hour)
 
-  CONNECTION = Faraday.new 'https://allocate.swin.edu.au/aplus/rest/timetable/' do |conn|
+  FARADAY_OPTIONS = { ssl: { ca_file: Rails.root.join('config/allocate_cert.pem').to_s } }
+
+  CONNECTION = Faraday.new('https://allocate.swin.edu.au/aplus/rest/timetable/', FARADAY_OPTIONS) do |conn|
     conn.request :json
     conn.response :json
     conn.response :caching do
@@ -9,6 +11,7 @@ class AllocateApiClient
     end
 
     conn.use :instrumentation
+
     conn.adapter Faraday.default_adapter
   end
 
