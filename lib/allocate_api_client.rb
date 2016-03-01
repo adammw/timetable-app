@@ -1,5 +1,5 @@
 class AllocateApiClient
-  ALLOCATE_ENDPOINT = 'https://allocate.swin.edu.au/aplus-2016/'
+  ALLOCATE_ENDPOINT = ENV['ALLOCATE_BASE_URL']
 
   CACHE_STORE = ActiveSupport::Cache::MemoryStore.new(namespace: 'allocate_api', expires_in: 1.hour)
 
