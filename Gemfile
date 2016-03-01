@@ -3,7 +3,7 @@ ruby File.read(File.expand_path('../.ruby-version', __FILE__)).chomp || '2.3.0'
 
 gem 'bundler', '>= 1.7.0'
 gem 'puma'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.2'
 gem 'pg'
 
 gem 'sprockets', '~> 2.12.3'
