@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :timetable, controller: :activity_allocation, only: [:new, :show, :create]
 
-  resources :subjects, controller: :subject, only: :index do
+  resources :subjects, controller: :subject, only: [:index, :show] do
     resources :activities, controller: :activity, only: :index
     resources :activity_groups, controller: :activity_group, only: :index
   end

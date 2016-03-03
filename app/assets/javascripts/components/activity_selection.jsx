@@ -1,6 +1,6 @@
 var ActivitySelection = React.createClass({
   getInitialState: function() {
-    return { selectedActivities: {}, activities: {}, activityGroups: {} };
+    return { selectedActivities: {}, activities: {}, subjects: {} };
   },
   activityMapForUnit: function(activities) {
     var activityMap = {};
@@ -40,10 +40,10 @@ var ActivitySelection = React.createClass({
         this.setState({ activities: activities, selectedActivities: selectedActivities });
         this.props.onChange && this.props.onChange(selectedActivities);
       }.bind(this));
-      $.getJSON('/subjects/' + unitCode + '/activity_groups').then(function(results) {
-        var activityGroups = _.clone(this.state.activityGroups);
-        activityGroups[unitCode] = results;
-        this.setState({ activityGroups: activityGroups });
+      $.getJSON('/subjects/' + unitCode).then(function(results) {
+        var subjects = _.clone(this.state.subjects);
+        _.extend(subjects, results);
+        this.setState({ subjects: subjects });
       }.bind(this));
     }, this);
     removedUnits.forEach(function(unitCode) {
@@ -56,17 +56,18 @@ var ActivitySelection = React.createClass({
   },
   renderActivitiesForUnit: function(unitCode) {
     var activities = this.state.activities[unitCode],
-        activityGroups = this.state.activityGroups[unitCode];
+        subject = this.state.subjects[unitCode];
         unit = this.props.units[unitCode];
-    if(!activities || !activityGroups || !unit) return;
+    if(!activities || !subject || !unit) return;
     return (
       <div className="pure-u-1-2" key={unitCode}>
         <h3 className="content-subhead">{unitCode}</h3>
         <p>{unit.description}</p>
-          {Object.keys(activityGroups).map(function(activityGroupCode) {
+          {Object.keys(subject.groups).map(function(activityGroupCode) {
+            var group = subject.groups[activityGroupCode];
             return (
               <div className="pure-form pure-g activity-group-selection" key={[unitCode,activityGroupCode].join('-')}>
-                <label className="pure-u-1-5"><abbr title={activityGroups[activityGroupCode].description}>{activityGroupCode}</abbr></label>
+                <label className="pure-u-1-5"><abbr title={group.description}>{activityGroupCode}</abbr></label>
                 <select className="pure-u-4-5" disabled={Object.keys(activities[activityGroupCode]).length == 1} onChange={this.handleChange.bind(this, unitCode, activityGroupCode)}>
                   {Object.keys(activities[activityGroupCode]).map(function(activityCode) {
                     var activity = activities[activityGroupCode][activityCode];

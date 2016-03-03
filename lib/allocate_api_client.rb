@@ -22,8 +22,8 @@ class AllocateApiClient
     response.body
   end
 
-  def get_activity_groups_for_unit(unitCode)
-    response = CONNECTION.get("subject/#{unitCode}/activity_groups")
+  def get_subject(unitCode)
+    response = CONNECTION.get("subject/#{unitCode}")
     response.body
   end
 

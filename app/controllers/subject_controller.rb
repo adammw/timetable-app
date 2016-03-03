@@ -1,6 +1,15 @@
 class SubjectController < ApplicationController
   def index
-    api_client = AllocateApiClient.new
     render json: api_client.search_for_subject(params[:query])
+  end
+
+  def show
+    render json: api_client.get_subject(params[:id])
+  end
+
+  private
+
+  def api_client
+    @api_client ||= AllocateApiClient.new
   end
 end
